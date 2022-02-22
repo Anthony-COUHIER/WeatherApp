@@ -22,5 +22,5 @@ data class CurrentData(
 
 data class WeatherData(
     @Json(name = "location") val location: LocationData,
-    @Json(name = "current") val city: CurrentData,
+    @Json(name = "current") val current: CurrentData,
 )

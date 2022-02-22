@@ -40,13 +40,19 @@ class CityModel : ViewModel() {
                 for (city in cities) {
                     val data = WeatherApi.retrofitService.getWeatherDataOnCity(q = city)
 
-                    _test.value = "Succes: ${data} elements"
-                    // val data = WeatherApi.retrofitService.getWeatherDataOnCity(q = city)
-                    // _citiesData.value?.set(city, data)
-                    Log.d(TAG, "got ${data}")
+                    if (_citiesData.value == null) {
+                        _citiesData.postValue(
+                            mutableMapOf<String, WeatherData>(
+                                city to data
+                            )
+                        )
+                        _citiesData.value?.set(city, data)
+                    } else {
+                        _citiesData.value!![city] = data
+                    }
                 }
+                result = Result.SUCCESS
             }
-            result = Result.SUCCESS
         } catch (e: Exception) {
             result = Result.ERROR
             Log.d(TAG, "got error $e")
