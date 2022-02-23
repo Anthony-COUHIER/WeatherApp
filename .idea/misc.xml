@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Anthony/Desktop/Kotlin/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/Anthony/Desktop/Kotlin/WeatherApp/app/src/main/res/layout/fragment_overview.xml" value="0.1" />
+        <entry key="..\:/Users/Anthony/Desktop/Kotlin/WeatherApp/app/src/main/res/layout/city_fragment_item.xml" value="0.4" />
+        <entry key="..\:/Users/Anthony/Desktop/Kotlin/WeatherApp/app/src/main/res/layout/fragment_overview.xml" value="0.264" />
       </map>
     </option>
   </component>

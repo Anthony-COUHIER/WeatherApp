@@ -17,44 +17,37 @@ val cities: List<String> = listOf(
 
 private const val TAG = "CITY_MODEL"
 
-enum class Result { WAITING, ERROR, SUCCESS }
+enum class WeatherApiResult { WAITING, ERROR, SUCCESS }
 
 class CityModel : ViewModel() {
 
-    private val _citiesData = MutableLiveData<MutableMap<String, WeatherData>>()
-    val citiesData: LiveData<MutableMap<String, WeatherData>> = _citiesData
+    private val _citiesData = MutableLiveData<MutableList<WeatherData>>()
+    val citiesData: LiveData<MutableList<WeatherData>> = _citiesData
 
     private val _test = MutableLiveData<String>()
     val test: LiveData<String> = _test
 
-    lateinit var result: Result
+    private val _result = MutableLiveData<WeatherApiResult>()
+    val result: LiveData<WeatherApiResult> = _result
 
     init {
         getWeatherCity()
     }
 
     private fun getWeatherCity() {
-        result = Result.WAITING
+        _result.value = WeatherApiResult.WAITING
         try {
             viewModelScope.launch {
-                for (city in cities) {
-                    val data = WeatherApi.retrofitService.getWeatherDataOnCity(q = city)
+                val allData: MutableList<WeatherData> = mutableListOf<WeatherData>()
 
-                    if (_citiesData.value == null) {
-                        _citiesData.postValue(
-                            mutableMapOf<String, WeatherData>(
-                                city to data
-                            )
-                        )
-                        _citiesData.value?.set(city, data)
-                    } else {
-                        _citiesData.value!![city] = data
-                    }
+                for (city in cities) {
+                    allData.add(WeatherApi.retrofitService.getWeatherDataOnCity(q = city))
                 }
-                result = Result.SUCCESS
+                _citiesData.value = allData
+                _result.value = WeatherApiResult.SUCCESS
             }
         } catch (e: Exception) {
-            result = Result.ERROR
+            _result.value = WeatherApiResult.ERROR
             Log.d(TAG, "got error $e")
         }
     }

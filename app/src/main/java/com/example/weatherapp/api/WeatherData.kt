@@ -15,7 +15,7 @@ data class WeatherData(
 
     data class CurrentData(
         @Json(name = "temp_c") val temp: Double,
-        @Json(name = "condition") val name: ConditionData,
+        @Json(name = "condition") val condition: ConditionData,
         @Json(name = "wind_kph") val wind: Double,
         @Json(name = "humidity") val humidity: Double,
     ) {
