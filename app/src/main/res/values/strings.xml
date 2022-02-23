@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">WeatherApp</string>
-    <string name="test">Test string: %s</string>
-    <string name="click_me">Click me!</string>
+    <string name="temp">%d°</string>
+    <string name="city">%s</string>
+    <string name="country">%s</string>
+    <string name="humidity">%d%%</string>
+    <string name="wind">%dkm/h</string>
 </resources>
